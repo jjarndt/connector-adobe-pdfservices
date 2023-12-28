@@ -2,6 +2,9 @@ package de.jjarndt.camunda.connector.adobe;
 
 import de.jjarndt.camunda.connector.adobe.model.ConnectorRequest;
 import de.jjarndt.camunda.connector.adobe.model.ConnectorResponse;
+import de.jjarndt.camunda.connector.adobe.service.OperationFactory;
+import de.jjarndt.camunda.connector.adobe.service.PDFClient;
+import de.jjarndt.camunda.connector.adobe.service.operations.Operation;
 import io.camunda.connector.api.annotation.OutboundConnector;
 import io.camunda.connector.api.outbound.OutboundConnectorContext;
 import io.camunda.connector.api.outbound.OutboundConnectorFunction;
@@ -30,11 +33,12 @@ public class AdobePdfServicesFunction implements OutboundConnectorFunction {
     @Override
     public Object execute(OutboundConnectorContext context) throws Exception {
         ConnectorRequest request = context.bindVariables(ConnectorRequest.class);
-        System.out.println("test");
-        return executeConnector(request);
+        PDFClient pdfClient = new PDFClient(request.authentication());
+        return executeConnector(request, pdfClient);
     }
 
-    private ConnectorResponse executeConnector(ConnectorRequest request){
-        return new ConnectorResponse(true, "test", "test");
+    private ConnectorResponse executeConnector(ConnectorRequest request, PDFClient pdfClient){
+        Operation operation = OperationFactory.createOperation(request.requestDetails().operationType(), pdfClient);
+        return operation.execute(request);
     }
 }

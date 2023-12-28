@@ -32,6 +32,7 @@
         <plugin.version.maven-resources-plugin>3.3.1</plugin.version.maven-resources-plugin>
         <plugin.version.maven-shade-plugin>3.5.1</plugin.version.maven-shade-plugin>
         <plugin.version.maven-surefire-plugin>3.2.2</plugin.version.maven-surefire-plugin>
+        <pdfservices.sdk.version>3.5.1</pdfservices.sdk.version>
     </properties>
 
     <dependencies>
@@ -95,6 +96,18 @@
             <artifactId>slf4j-jdk14</artifactId>
             <version>${version.slf4j}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.adobe.documentservices</groupId>
+            <artifactId>pdfservices-sdk</artifactId>
+            <version>${pdfservices.sdk.version}</version>
         </dependency>
 
         <!-- for testing connectors locally in bundle with runtime -->
