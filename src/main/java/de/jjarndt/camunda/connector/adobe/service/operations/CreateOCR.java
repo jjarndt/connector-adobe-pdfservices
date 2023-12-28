@@ -18,17 +18,14 @@ public final class CreateOCR implements Operation {
     @Override
     public ConnectorResponse execute(ConnectorRequest request) {
         try {
-            ExecutionContext executionContext = ExecutionContext.create(client.getCredentials());
-
+            ExecutionContext executionContext = client.createExecutionContext();
             OCROperation ocrOperation = OCROperation.createNew();
             FileRef source = FileRef.createFromLocalFile(request.requestDetails().sourcePath());
             ocrOperation.setInput(source);
 
             FileRef result = ocrOperation.execute(executionContext);
-            String outputFilePath = request.requestDetails().destinationPath();
-            result.saveAs(outputFilePath);
-
-            return new ConnectorResponse(true, "OCR erfolgreich ausgeführt", outputFilePath);
+            result.saveAs(request.requestDetails().destinationPath());
+            return new ConnectorResponse(true, "OCR erfolgreich ausgeführt", request.requestDetails().destinationPath());
         } catch (Exception e) {
             return new ConnectorResponse(false, "OCR-Fehler: " + e.getMessage(), null);
         }

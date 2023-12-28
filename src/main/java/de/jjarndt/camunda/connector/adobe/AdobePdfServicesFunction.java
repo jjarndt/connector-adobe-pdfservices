@@ -2,7 +2,7 @@ package de.jjarndt.camunda.connector.adobe;
 
 import de.jjarndt.camunda.connector.adobe.model.ConnectorRequest;
 import de.jjarndt.camunda.connector.adobe.model.ConnectorResponse;
-import de.jjarndt.camunda.connector.adobe.service.OperationFactory;
+import de.jjarndt.camunda.connector.adobe.service.AdobePDFService;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.Operation;
 import io.camunda.connector.api.annotation.OutboundConnector;
@@ -19,7 +19,7 @@ import io.camunda.connector.generator.java.annotation.ElementTemplate;
         name = "Adobe PDF Connector",
         version = 1,
         description = "Connector to interact with Adobe PDF Services",
-        icon = "icon.svg",
+        icon = "adobe-icon.svg",
         documentationRef = "https://developer.adobe.com/document-services/apis/pdf-services/",
         propertyGroups = {
                 @ElementTemplate.PropertyGroup(id = "authentication", label = "Authentication"),
@@ -30,6 +30,14 @@ import io.camunda.connector.generator.java.annotation.ElementTemplate;
         inputDataClass = ConnectorRequest.class)
 public class AdobePdfServicesFunction implements OutboundConnectorFunction {
 
+    private AdobePDFService adobePDFService;
+
+    public AdobePdfServicesFunction(AdobePDFService adobePDFService) {
+        this.adobePDFService = adobePDFService;
+    }
+
+    public AdobePdfServicesFunction(){}
+
     @Override
     public Object execute(OutboundConnectorContext context) throws Exception {
         ConnectorRequest request = context.bindVariables(ConnectorRequest.class);
@@ -37,8 +45,8 @@ public class AdobePdfServicesFunction implements OutboundConnectorFunction {
         return executeConnector(request, pdfClient);
     }
 
-    private ConnectorResponse executeConnector(ConnectorRequest request, PDFClient pdfClient){
-        Operation operation = OperationFactory.createOperation(request.requestDetails().operationType(), pdfClient);
+    private ConnectorResponse executeConnector(ConnectorRequest request, PDFClient pdfClient) {
+        Operation operation = adobePDFService.createOperation(request.requestDetails().operationType(), pdfClient);
         return operation.execute(request);
     }
 }

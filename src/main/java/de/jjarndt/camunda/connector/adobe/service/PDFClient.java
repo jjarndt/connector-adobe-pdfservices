@@ -14,14 +14,10 @@ public class PDFClient {
     }
 
     public ExecutionContext createExecutionContext() {
-        Credentials credentials = Credentials.servicePrincipalCredentialsBuilder()
-                .withClientId(clientId)
-                .withClientSecret(clientSecret)
-                .build();
-        return ExecutionContext.create(credentials);
+        return ExecutionContext.create(getCredentials());
     }
 
-    public Credentials getCredentials() {
+    private Credentials getCredentials() {
         return Credentials.servicePrincipalCredentialsBuilder()
                 .withClientId(clientId)
                 .withClientSecret(clientSecret)
