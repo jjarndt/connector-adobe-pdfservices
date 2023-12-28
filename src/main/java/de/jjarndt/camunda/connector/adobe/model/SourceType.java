@@ -1,4 +1,4 @@
-package de.jjarndt.camunda.connector.adobe.model.request;
+package de.jjarndt.camunda.connector.adobe.model;
 
 public enum SourceType {
     URL,

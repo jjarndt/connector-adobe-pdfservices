@@ -1,1 +1,6 @@
-io.camunda.example.MyConnectorFunction
+#
+# Copyright (c) 2024 Jakob Arndt
+# Use of this source code is governed by MIT license that can be found in the LICENSE file
+# or at https://opensource.org/licenses/MIT
+#
+de.jjarndt.camunda.connector.adobe.AdobePdfServicesFunction
