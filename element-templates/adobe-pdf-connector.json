@@ -83,9 +83,6 @@
     },
     "type" : "Dropdown",
     "choices" : [ {
-      "name" : "CLOUD_STORAGE",
-      "value" : "CLOUD_STORAGE"
-    }, {
       "name" : "LOCAL_FILE",
       "value" : "LOCAL_FILE"
     }, {
@@ -116,11 +113,11 @@
     },
     "type" : "Dropdown",
     "choices" : [ {
-      "name" : "CLOUD_STORAGE",
-      "value" : "CLOUD_STORAGE"
-    }, {
       "name" : "LOCAL_FILE",
       "value" : "LOCAL_FILE"
+    }, {
+      "name" : "EXTERNAL_STORAGE",
+      "value" : "EXTERNAL_STORAGE"
     } ]
   }, {
     "id" : "requestDetails.destinationPath",
@@ -146,8 +143,8 @@
     },
     "type" : "Dropdown",
     "choices" : [ {
-      "name" : "EXPORT_FROM_STATIC_HTML",
-      "value" : "EXPORT_FROM_STATIC_HTML"
+      "name" : "CREATE_PDF_FROM_STATIC_HTML",
+      "value" : "CREATE_PDF_FROM_STATIC_HTML"
     }, {
       "name" : "EXPORT_FROM_DOCX",
       "value" : "EXPORT_FROM_DOCX"
