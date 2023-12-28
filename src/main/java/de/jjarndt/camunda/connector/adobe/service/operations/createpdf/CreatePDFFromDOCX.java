@@ -18,4 +18,3 @@ public final class CreatePDFFromDOCX extends AbstractPDFOperation {
         return createPdfOperation.execute(executionContext);
     }
 }
-

@@ -49,4 +49,3 @@ public abstract class AbstractPDFOperation implements Operation {
         // needs impl.
     }
 }
-
