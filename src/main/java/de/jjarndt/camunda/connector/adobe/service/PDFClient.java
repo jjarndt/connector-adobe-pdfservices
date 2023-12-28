@@ -28,5 +28,4 @@ public class PDFClient {
                 .build();
     }
 
-    // Weitere Methoden zur Unterstützung spezifischer Operationen können hier hinzugefügt werden
 }
