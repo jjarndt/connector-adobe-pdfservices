@@ -6,4 +6,3 @@ import de.jjarndt.camunda.connector.adobe.model.ConnectorResponse;
 public interface Operation {
     ConnectorResponse execute(ConnectorRequest request);
 }
-

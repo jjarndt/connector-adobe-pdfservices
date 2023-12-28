@@ -1,10 +1,11 @@
-package de.jjarndt.camunda.connector.adobe.service.operations;
+package de.jjarndt.camunda.connector.adobe.service.operations.exportpdf;
 
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.ExportPDFOperation;
 import com.adobe.pdfservices.operation.pdfops.options.exportpdf.ExportPDFTargetFormat;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
+import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
 
 public final class ExportPDFToDOCX extends AbstractPDFOperation {
     public ExportPDFToDOCX(PDFClient client) {

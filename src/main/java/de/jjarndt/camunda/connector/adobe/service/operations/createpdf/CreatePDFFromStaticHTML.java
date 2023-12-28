@@ -1,4 +1,4 @@
-package de.jjarndt.camunda.connector.adobe.service.operations;
+package de.jjarndt.camunda.connector.adobe.service.operations.createpdf;
 
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.io.FileRef;
@@ -6,6 +6,7 @@ import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.CreatePDFOptions;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.PageLayout;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
+import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
 
 public final class CreatePDFFromStaticHTML extends AbstractPDFOperation {
     public CreatePDFFromStaticHTML(PDFClient client) {

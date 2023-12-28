@@ -1,7 +1,6 @@
 package de.jjarndt.camunda.connector.adobe;
 
 import de.jjarndt.camunda.connector.adobe.service.AdobePDFService;
-import de.jjarndt.camunda.connector.adobe.service.operations.CreateOCR;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
