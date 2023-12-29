@@ -11,7 +11,7 @@ public class OptionsParser {
             return Map.of();
         }
 
-        return Arrays.stream(input.split("[,;]+")) // Trennt bei Komma und Semikolon
+        return Arrays.stream(input.split("[,;]+"))
                 .flatMap(s -> Arrays.stream(s.trim().split("\\s+(?=[a-zA-Z_]+\\s*=)")))
                 .map(s -> s.replace(':', '=').trim())
                 .map(s -> s.split("=", 2))
