@@ -6,7 +6,7 @@ import com.adobe.pdfservices.operation.pdfops.options.extractpdf.ExtractElementT
 import com.adobe.pdfservices.operation.pdfops.options.extractpdf.ExtractPDFOptions;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
-import de.jjarndt.camunda.connector.adobe.util.OperationInput;
+import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 
 import java.util.Arrays;
 

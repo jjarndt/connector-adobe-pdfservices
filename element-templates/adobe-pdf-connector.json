@@ -164,7 +164,7 @@
       "optional": true,
       "group": "operation",
       "binding": {
-        "name": "requestDetails.ocrAdditionalInput",
+        "name": "requestDetails.options",
         "type": "zeebe:input"
       },
       "condition": {

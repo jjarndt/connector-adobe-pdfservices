@@ -6,7 +6,7 @@ import com.adobe.pdfservices.operation.pdfops.options.createpdf.CreatePDFOptions
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.PageLayout;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
-import de.jjarndt.camunda.connector.adobe.util.OperationInput;
+import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 import org.json.JSONObject;
 
 public final class CreatePDFFromDynamicHTML extends AbstractPDFOperation {

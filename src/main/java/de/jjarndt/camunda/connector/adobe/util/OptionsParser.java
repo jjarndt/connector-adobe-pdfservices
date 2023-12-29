@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class OptionsParser {
 
-    public static Map<String, Integer> parseOptions(String input) {
+    public static Map<String, String> parseOptions(String input) {
         if (input == null || input.isEmpty()) {
             return Map.of();
         }
@@ -16,15 +16,7 @@ public class OptionsParser {
                 .filter(arr -> arr.length == 2)
                 .collect(Collectors.toMap(
                         arr -> arr[0],
-                        arr -> safeParseInt(arr[1])
+                        arr -> arr[1]
                 ));
-    }
-
-    private static Integer safeParseInt(String s) {
-        try {
-            return Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return null;
-        }
     }
 }

@@ -6,7 +6,7 @@ import de.jjarndt.camunda.connector.adobe.model.ConnectorRequest;
 import de.jjarndt.camunda.connector.adobe.model.ConnectorResponse;
 import de.jjarndt.camunda.connector.adobe.model.DestinationType;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
-import de.jjarndt.camunda.connector.adobe.util.OperationInput;
+import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 import de.jjarndt.camunda.connector.adobe.util.OptionsParser;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public abstract class AbstractPDFOperation implements Operation {
     private OperationInput createOperationInput(ConnectorRequest request) throws Exception {
         ExecutionContext executionContext = client.createExecutionContext();
         FileRef source = createSourceFileRef(request);
-        Map<String, Integer> options = OptionsParser.parseOptions(request.requestDetails().options());
+        Map<String, String> options = OptionsParser.parseOptions(request.requestDetails().options());
         return new OperationInput(executionContext, source, options);
     }
 
