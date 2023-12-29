@@ -1,12 +1,12 @@
 package de.jjarndt.camunda.connector.adobe.service.operations.createpdf;
 
-import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.CreatePDFOptions;
 import com.adobe.pdfservices.operation.pdfops.options.createpdf.PageLayout;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
+import de.jjarndt.camunda.connector.adobe.util.OperationInput;
 
 public final class CreatePDFFromStaticHTML extends AbstractPDFOperation {
     public CreatePDFFromStaticHTML(PDFClient client) {
@@ -14,11 +14,11 @@ public final class CreatePDFFromStaticHTML extends AbstractPDFOperation {
     }
 
     @Override
-    protected FileRef performOperation(ExecutionContext executionContext, FileRef source) throws Exception {
+    protected FileRef performOperation(OperationInput input) throws Exception {
         CreatePDFOperation htmlToPDFOperation = CreatePDFOperation.createNew();
-        htmlToPDFOperation.setInput(source);
+        htmlToPDFOperation.setInput(input.source());
         setCustomOptions(htmlToPDFOperation); // Implement this method as needed
-        return htmlToPDFOperation.execute(executionContext);
+        return htmlToPDFOperation.execute(input.executionContext());
     }
 
     private static void setCustomOptions(CreatePDFOperation htmlToPDFOperation) {

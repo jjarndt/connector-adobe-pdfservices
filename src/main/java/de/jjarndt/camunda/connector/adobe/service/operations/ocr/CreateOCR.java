@@ -1,10 +1,10 @@
 package de.jjarndt.camunda.connector.adobe.service.operations.ocr;
 
-import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.OCROperation;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
+import de.jjarndt.camunda.connector.adobe.util.OperationInput;
 
 public final class CreateOCR extends AbstractPDFOperation {
     public CreateOCR(PDFClient client) {
@@ -12,9 +12,9 @@ public final class CreateOCR extends AbstractPDFOperation {
     }
 
     @Override
-    protected FileRef performOperation(ExecutionContext executionContext, FileRef source) throws Exception {
+    protected FileRef performOperation(OperationInput input) throws Exception {
         OCROperation ocrOperation = OCROperation.createNew();
-        ocrOperation.setInput(source);
-        return ocrOperation.execute(executionContext);
+        ocrOperation.setInput(input.source());
+        return ocrOperation.execute(input.executionContext());
     }
 }

@@ -1,11 +1,11 @@
 package de.jjarndt.camunda.connector.adobe.service.operations.exportpdf;
 
-import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.ExportPDFOperation;
 import com.adobe.pdfservices.operation.pdfops.options.exportpdf.ExportPDFTargetFormat;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
+import de.jjarndt.camunda.connector.adobe.util.OperationInput;
 
 public final class ExportPDFToDOCX extends AbstractPDFOperation {
     public ExportPDFToDOCX(PDFClient client) {
@@ -13,10 +13,10 @@ public final class ExportPDFToDOCX extends AbstractPDFOperation {
     }
 
     @Override
-    protected FileRef performOperation(ExecutionContext executionContext, FileRef source) throws Exception {
+    protected FileRef performOperation(OperationInput input) throws Exception {
         ExportPDFOperation exportPdfOperation = ExportPDFOperation.createNew(ExportPDFTargetFormat.DOCX);
-        exportPdfOperation.setInput(source);
-        return exportPdfOperation.execute(executionContext);
+        exportPdfOperation.setInput(input.source());
+        return exportPdfOperation.execute(input.executionContext());
     }
 }
 

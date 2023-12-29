@@ -16,6 +16,9 @@ public record RequestDetails(
         String destinationPath,
 
         @TemplateProperty(group = "operation", label = "Operation Type", description = "Type of operation to perform on the PDF")
-        OperationType operationType
+        OperationType operationType,
+
+        @TemplateProperty(group = "operation", label = "Options", description = "Type of operation to perform on the PDF")
+        String options
 ) {
 }

@@ -6,9 +6,12 @@ import de.jjarndt.camunda.connector.adobe.model.ConnectorRequest;
 import de.jjarndt.camunda.connector.adobe.model.ConnectorResponse;
 import de.jjarndt.camunda.connector.adobe.model.DestinationType;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
+import de.jjarndt.camunda.connector.adobe.util.OperationInput;
+import de.jjarndt.camunda.connector.adobe.util.OptionsParser;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 
 public abstract class AbstractPDFOperation implements Operation {
     protected final PDFClient client;
@@ -17,21 +20,24 @@ public abstract class AbstractPDFOperation implements Operation {
         this.client = client;
     }
 
-    protected abstract FileRef performOperation(ExecutionContext executionContext, FileRef source) throws Exception;
+    protected abstract FileRef performOperation(OperationInput input) throws Exception;
 
     @Override
     public ConnectorResponse execute(ConnectorRequest request) {
         try {
-            ExecutionContext executionContext = client.createExecutionContext();
-            FileRef source = createSourceFileRef(request);
-
-            FileRef result = performOperation(executionContext, source);
+            FileRef result = performOperation(createOperationInput(request));
             saveResultFile(result, request);
-
-            return new ConnectorResponse(true, "Operation succesfully", request.requestDetails().destinationPath());
+            return new ConnectorResponse(true, "Operation successfully", request.requestDetails().destinationPath());
         } catch (Exception e) {
             return new ConnectorResponse(false, "Operation-Error: " + e.getMessage(), null);
         }
+    }
+
+    private OperationInput createOperationInput(ConnectorRequest request) throws Exception {
+        ExecutionContext executionContext = client.createExecutionContext();
+        FileRef source = createSourceFileRef(request);
+        Map<String, Integer> options = OptionsParser.parseOptions(request.requestDetails().options());
+        return new OperationInput(executionContext, source, options);
     }
 
     private FileRef createSourceFileRef(ConnectorRequest request) throws Exception {
@@ -41,11 +47,11 @@ public abstract class AbstractPDFOperation implements Operation {
         };
     }
 
-    //TODO: save in external storage
     private void saveResultFile(FileRef result, ConnectorRequest request) throws IOException {
         if (request.requestDetails().destinationType() == DestinationType.LOCAL_FILE) {
             result.saveAs(request.requestDetails().destinationPath());
+        } else if (request.requestDetails().destinationType() == DestinationType.EXTERNAL_STORAGE) {
+            // needs impl
         }
-        // needs impl.
     }
 }

@@ -155,7 +155,24 @@
       "name" : "OCR",
       "value" : "OCR"
     } ]
-  }, {
+  },
+    {
+      "id": "requestDetails.ocrAdditionalInput",
+      "label": "OCR Additional Input",
+      "description": "Additional input for OCR operation",
+      "type": "String",
+      "optional": true,
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.ocrAdditionalInput",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "requestDetails.operationType",
+        "equals": "OCR"
+      }
+    },
+    {
     "id" : "resultVariable",
     "label" : "Result variable",
     "description" : "Name of variable to store the response in",
