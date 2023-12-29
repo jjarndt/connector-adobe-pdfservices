@@ -7,16 +7,19 @@ import java.util.stream.Collectors;
 public class OptionsParser {
 
     public static Map<String, String> parseOptions(String input) {
-        if (input == null || input.isEmpty()) {
+        if (input == null || input.trim().isEmpty()) {
             return Map.of();
         }
 
-        return Arrays.stream(input.split("[,;\\s]+"))
-                .map(s -> s.split("="))
-                .filter(arr -> arr.length == 2)
+        return Arrays.stream(input.split("[,;]+")) // Trennt bei Komma und Semikolon
+                .flatMap(s -> Arrays.stream(s.trim().split("\\s+(?=[a-zA-Z_]+\\s*=)")))
+                .map(s -> s.replace(':', '=').trim())
+                .map(s -> s.split("=", 2))
+                .filter(arr -> arr.length == 2 && !arr[0].trim().isEmpty() && !arr[1].trim().isEmpty())
                 .collect(Collectors.toMap(
-                        arr -> arr[0],
-                        arr -> arr[1]
+                        arr -> arr[0].trim().toLowerCase(),
+                        arr -> arr[1].trim().replace('-', '_').toUpperCase(),
+                        (existing, replacement) -> existing
                 ));
     }
 }
