@@ -3,7 +3,8 @@
 
 
 # Camunda 8 Outbound Connector for Adobe PDF Services
-# ! Work in Progress !
+
+<img src="assets/camunda.svg" alt="Camunda Icon" width="80" height="80"/> <img src="assets/adobe-icon.svg" alt="Adobe Icon" width="80" height="80"/>
 
 ## Overview
 This repository contains the Camunda 8 Outbound Connector for Adobe PDF Services, a powerful integration tool for automating document workflows in any application. Adobe PDF Services offers a suite of cloud-based APIs for document generation, enabling the creation of custom PDF documents from Word templates and JSON data.
@@ -11,7 +12,9 @@ This repository contains the Camunda 8 Outbound Connector for Adobe PDF Services
 ## Features
 - **Document Generation**: Automatically generate PDF documents using Word templates and JSON data.
 - **Workflow Integration**: Seamlessly integrate multi-step document processes into Camunda 8 workflows.
-- **Cloud-Based API**: Utilize Adobe's robust cloud infrastructure for reliable and scalable document services.
+
+
+<img src="assets/example.png" alt="Example" width="407" height="124"/>
 
 ## Prerequisites
 - Camunda 8
