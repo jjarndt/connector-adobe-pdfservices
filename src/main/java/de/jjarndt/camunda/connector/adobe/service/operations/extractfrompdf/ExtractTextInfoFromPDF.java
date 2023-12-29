@@ -9,6 +9,9 @@ import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperatio
 import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class ExtractTextInfoFromPDF extends AbstractPDFOperation {
     public ExtractTextInfoFromPDF(PDFClient client) {
@@ -17,15 +20,28 @@ public final class ExtractTextInfoFromPDF extends AbstractPDFOperation {
 
     @Override
     protected FileRef performOperation(OperationInput input) throws Exception {
+        Map<String, String> options = input.options();
+        ExtractPDFOptions extractPDFOptions = buildExtractPDFOptions(options);
+
         ExtractPDFOperation extractPDFOperation = ExtractPDFOperation.createNew();
         extractPDFOperation.setInputFile(input.source());
-
-        ExtractPDFOptions extractPDFOptions = ExtractPDFOptions.extractPdfOptionsBuilder()
-                .addElementsToExtract(Arrays.asList(ExtractElementType.TEXT))
-                .build();
         extractPDFOperation.setOptions(extractPDFOptions);
 
         return extractPDFOperation.execute(input.executionContext());
+    }
+
+    private ExtractPDFOptions buildExtractPDFOptions(Map<String, String> options) {
+        boolean addCharInfo = Boolean.parseBoolean(options.getOrDefault("addCharInfo", "false"));
+        String elements = options.getOrDefault("elementsToExtract", "TEXT");
+        List<ExtractElementType> elementTypes = Arrays.stream(elements.split(","))
+                .map(String::trim)
+                .map(ExtractElementType::valueOf)
+                .collect(Collectors.toList());
+
+        return ExtractPDFOptions.extractPdfOptionsBuilder()
+                .addElementsToExtract(elementTypes)
+                .addCharInfo(addCharInfo)
+                .build();
     }
 }
 

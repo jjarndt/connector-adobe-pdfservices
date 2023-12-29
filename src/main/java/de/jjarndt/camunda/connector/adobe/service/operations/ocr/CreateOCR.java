@@ -1,5 +1,6 @@
 package de.jjarndt.camunda.connector.adobe.service.operations.ocr;
 
+import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.io.FileRef;
 import com.adobe.pdfservices.operation.pdfops.OCROperation;
 import com.adobe.pdfservices.operation.pdfops.options.ocr.OCROptions;
@@ -9,6 +10,7 @@ import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
 
+import java.io.IOException;
 import java.util.Map;
 
 public final class CreateOCR extends AbstractPDFOperation {
@@ -17,7 +19,7 @@ public final class CreateOCR extends AbstractPDFOperation {
     }
 
     @Override
-    protected FileRef performOperation(OperationInput input) throws Exception {
+    protected FileRef performOperation(OperationInput input)  throws ServiceApiException, IOException {
         Map<String, String> options = input.options();
         OCROptions ocrOptions = buildOCROptions(options);
 
