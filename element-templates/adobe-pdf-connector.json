@@ -143,36 +143,43 @@
     },
     "type" : "Dropdown",
     "choices" : [ {
+      "name" : "EXTRACT_TEXT_INFO_FROM_PDF",
+      "value" : "EXTRACT_TEXT_INFO_FROM_PDF"
+    }, {
+      "name" : "CREATE_PDF_FROM_DYNAMIC_HTML",
+      "value" : "CREATE_PDF_FROM_DYNAMIC_HTML"
+    }, {
+      "name" : "EXTRACT_TEXT_TABLE_INFO_FROM_PDF",
+      "value" : "EXTRACT_TEXT_TABLE_INFO_FROM_PDF"
+    }, {
       "name" : "CREATE_PDF_FROM_STATIC_HTML",
       "value" : "CREATE_PDF_FROM_STATIC_HTML"
     }, {
       "name" : "EXPORT_FROM_DOCX",
       "value" : "EXPORT_FROM_DOCX"
     }, {
-      "name" : "EXPORT_PDF_TO_JPEG",
-      "value" : "EXPORT_PDF_TO_JPEG"
+      "name" : "CREATE_PDF_FROM_DOCX",
+      "value" : "CREATE_PDF_FROM_DOCX"
+    }, {
+      "name" : "CREATE_PDF_FROM_PPTX",
+      "value" : "CREATE_PDF_FROM_PPTX"
     }, {
       "name" : "OCR",
       "value" : "OCR"
     } ]
-  },
-    {
-      "id": "requestDetails.ocrAdditionalInput",
-      "label": "OCR Additional Input",
-      "description": "Additional input for OCR operation",
-      "type": "String",
-      "optional": true,
-      "group": "operation",
-      "binding": {
-        "name": "requestDetails.options",
-        "type": "zeebe:input"
-      },
-      "condition": {
-        "property": "requestDetails.operationType",
-        "equals": "OCR"
-      }
+  }, {
+    "id" : "requestDetails.options",
+    "label" : "Options",
+    "description" : "Type of operation to perform on the PDF",
+    "optional" : false,
+    "feel" : "optional",
+    "group" : "operation",
+    "binding" : {
+      "name" : "requestDetails.options",
+      "type" : "zeebe:input"
     },
-    {
+    "type" : "String"
+  }, {
     "id" : "resultVariable",
     "label" : "Result variable",
     "description" : "Name of variable to store the response in",
@@ -217,6 +224,6 @@
     "type" : "Hidden"
   } ],
   "icon" : {
-    "contents" : "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDYwIDU4LjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPgogIDxwYXRoIGQ9Ik0xMC42IDBoMzguOEM1NS4yIDAgNjAgNC44IDYwIDEwLjZ2MzcuMmMwIDUuOS00LjggMTAuNi0xMC42IDEwLjZIMTAuNkM0LjggNTguNSAwIDUzLjcgMCA0Ny45VjEwLjZDMCA0LjggNC44IDAgMTAuNiAweiIgZmlsbD0iI2IzMGIwMCIvPgogIDxwYXRoIGQ9Ik00OC4yIDMzLjlDNDcgMzIuNiA0NC43IDMyIDQxLjQgMzJjLTEuOCAwLTMuNy4yLTUuNS41LTEuMi0xLjEtMi4yLTIuNC0zLjItMy43LS43LTEtMS40LTItMi0zLjEgMS0yLjggMS42LTUuOCAxLjgtOC44IDAtMi43LTEuMS01LjYtNC4xLTUuNi0xIDAtMiAuNi0yLjUgMS41LTEuMyAyLjItLjggNi43IDEuMyAxMS40LS43IDIuMS0xLjUgNC4yLTIuNCA2LjUtLjggMi0xLjcgMy45LTIuOCA1LjctMy4xIDEuMi05LjYgNC4yLTEwLjIgNy41LS4yIDEgLjEgMiAuOSAyLjYuNy42IDEuNyAxIDIuNy45IDMuOSAwIDcuOC01LjQgMTAuNS0xMC4xIDEuNS0uNSAzLTEgNC42LTEuNCAxLjctLjQgMy4zLS44IDQuOC0xLjEgNC4yIDMuNiA3LjkgNC4yIDkuNyA0LjIgMi41IDAgMy41LTEuMSAzLjgtMiAuNC0xLjEuMi0yLjMtLjYtMy4xem0tMi43IDEuOWMtLjEuNy0uOSAxLjItMS45IDEuMi0uMyAwLS42IDAtLjktLjEtMi0uNS0zLjktMS41LTUuNS0yLjggMS4zLS4yIDIuNy0uMyA0LS4zLjkgMCAxLjguMSAyLjcuMi45LjIgMS45LjYgMS42IDEuOHpNMjcuNiAxMy43Yy4yLS4zLjUtLjUuOS0uNiAxIDAgMS4yIDEuMSAxLjIgMi4xLS4xIDIuMy0uNSA0LjUtMS4yIDYuNy0xLjctNC4zLTEuNS03LjItLjktOC4yem01LjYgMTkuMmMtMS4xLjItMi4yLjUtMy4zLjgtLjguMi0xLjYuNS0yLjUuNy40LS45LjgtMS44IDEuMi0yLjYuNS0xLjEuOS0yLjIgMS4zLTMuMy40LjYuNyAxLjEgMS4xIDEuNi43IDEgMS41IDEuOSAyLjIgMi44em0tMTIuMSA1LjhjLTIuNSA0LTUgNi42LTYuNCA2LjYtLjIgMC0uNS0uMS0uNi0uMi0uMy0uMi0uNC0uNi0uMy0uOS4yLTEuNSAzLjEtMy42IDcuMy01LjV6IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPgo="
+    "contents" : "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDYwIDU4LjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KICA8cGF0aCBkPSJNMTAuNiAwaDM4LjhDNTUuMiAwIDYwIDQuOCA2MCAxMC42djM3LjJjMCA1LjktNC44IDEwLjYtMTAuNiAxMC42SDEwLjZDNC44IDU4LjUgMCA1My43IDAgNDcuOVYxMC42QzAgNC44IDQuOCAwIDEwLjYgMHoiIGZpbGw9IiNiMzBiMDAiLz4NCiAgPHBhdGggZD0iTTQ4LjIgMzMuOUM0NyAzMi42IDQ0LjcgMzIgNDEuNCAzMmMtMS44IDAtMy43LjItNS41LjUtMS4yLTEuMS0yLjItMi40LTMuMi0zLjctLjctMS0xLjQtMi0yLTMuMSAxLTIuOCAxLjYtNS44IDEuOC04LjggMC0yLjctMS4xLTUuNi00LjEtNS42LTEgMC0yIC42LTIuNSAxLjUtMS4zIDIuMi0uOCA2LjcgMS4zIDExLjQtLjcgMi4xLTEuNSA0LjItMi40IDYuNS0uOCAyLTEuNyAzLjktMi44IDUuNy0zLjEgMS4yLTkuNiA0LjItMTAuMiA3LjUtLjIgMSAuMSAyIC45IDIuNi43LjYgMS43IDEgMi43LjkgMy45IDAgNy44LTUuNCAxMC41LTEwLjEgMS41LS41IDMtMSA0LjYtMS40IDEuNy0uNCAzLjMtLjggNC44LTEuMSA0LjIgMy42IDcuOSA0LjIgOS43IDQuMiAyLjUgMCAzLjUtMS4xIDMuOC0yIC40LTEuMS4yLTIuMy0uNi0zLjF6bS0yLjcgMS45Yy0uMS43LS45IDEuMi0xLjkgMS4yLS4zIDAtLjYgMC0uOS0uMS0yLS41LTMuOS0xLjUtNS41LTIuOCAxLjMtLjIgMi43LS4zIDQtLjMuOSAwIDEuOC4xIDIuNy4yLjkuMiAxLjkuNiAxLjYgMS44ek0yNy42IDEzLjdjLjItLjMuNS0uNS45LS42IDEgMCAxLjIgMS4xIDEuMiAyLjEtLjEgMi4zLS41IDQuNS0xLjIgNi43LTEuNy00LjMtMS41LTcuMi0uOS04LjJ6bTUuNiAxOS4yYy0xLjEuMi0yLjIuNS0zLjMuOC0uOC4yLTEuNi41LTIuNS43LjQtLjkuOC0xLjggMS4yLTIuNi41LTEuMS45LTIuMiAxLjMtMy4zLjQuNi43IDEuMSAxLjEgMS42LjcgMSAxLjUgMS45IDIuMiAyLjh6bS0xMi4xIDUuOGMtMi41IDQtNSA2LjYtNi40IDYuNi0uMiAwLS41LS4xLS42LS4yLS4zLS4yLS40LS42LS4zLS45LjItMS41IDMuMS0zLjYgNy4zLTUuNXoiIGZpbGw9IiNmZmYiLz4NCjwvc3ZnPg0K"
   }
 }

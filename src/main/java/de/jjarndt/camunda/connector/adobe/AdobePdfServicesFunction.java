@@ -19,7 +19,7 @@ import io.camunda.connector.generator.java.annotation.ElementTemplate;
         name = "Adobe PDF Connector",
         version = 1,
         description = "Connector to interact with Adobe PDF Services",
-        icon = "assets/adobe-icon.svg",
+        icon = "adobe-icon.svg",
         documentationRef = "https://developer.adobe.com/document-services/apis/pdf-services/",
         propertyGroups = {
                 @ElementTemplate.PropertyGroup(id = "authentication", label = "Authentication"),
