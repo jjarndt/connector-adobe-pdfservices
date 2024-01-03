@@ -19,12 +19,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-/**
- * This class is a test class for the CreateOCR class. It tests the performOperation() method
- * and various scenarios with different options and exceptions.
- */
 class CreateOCRTest {
 
     @Mock

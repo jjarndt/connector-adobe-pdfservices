@@ -9,11 +9,12 @@ import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDF
 import de.jjarndt.camunda.connector.adobe.service.operations.exportpdf.ExportPDFToDOCX;
 import de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf.ExtractInfoFromPDF;
 import de.jjarndt.camunda.connector.adobe.service.operations.ocr.CreateOCR;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
 
 class AdobePDFServiceTest {
 

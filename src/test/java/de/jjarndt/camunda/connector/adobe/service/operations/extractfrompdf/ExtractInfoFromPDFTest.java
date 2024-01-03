@@ -1,10 +1,10 @@
-package de.jjarndt.camunda.connector.adobe.service.operations.createpdf;
+package de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf;
 
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.io.FileRef;
-import com.adobe.pdfservices.operation.pdfops.CreatePDFOperation;
-import com.adobe.pdfservices.operation.pdfops.options.createpdf.CreatePDFOptions;
+import com.adobe.pdfservices.operation.pdfops.ExtractPDFOperation;
+import com.adobe.pdfservices.operation.pdfops.options.extractpdf.ExtractPDFOptions;
 import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class CreatePDFFromDOCXTest {
+class ExtractInfoFromPDFTest {
 
     @Mock
     private PDFClient mockPDFClient;
@@ -37,46 +37,47 @@ class CreatePDFFromDOCXTest {
     private FileRef mockFileRef;
 
     @Mock
-    private CreatePDFOperation mockCreatePdfOperation;
+    private ExtractPDFOperation mockExtractPdfOperation;
 
-    private CreatePDFFromDOCX createPdfFromDocx;
+    private ExtractInfoFromPDF extractInfoFromPdf;
 
-    private MockedStatic<CreatePDFOperation> mockedCreatePdfOperation;
+    private MockedStatic<ExtractPDFOperation> mockedExtractPdfOperation;
 
     @BeforeEach
     void setUp() throws ServiceApiException, IOException {
         MockitoAnnotations.openMocks(this);
-        createPdfFromDocx = new CreatePDFFromDOCX(mockPDFClient);
+        extractInfoFromPdf = new ExtractInfoFromPDF(mockPDFClient);
 
-        mockedCreatePdfOperation = Mockito.mockStatic(CreatePDFOperation.class);
-        mockedCreatePdfOperation.when(CreatePDFOperation::createNew).thenReturn(mockCreatePdfOperation);
+        mockedExtractPdfOperation = Mockito.mockStatic(ExtractPDFOperation.class);
+        mockedExtractPdfOperation.when(ExtractPDFOperation::createNew).thenReturn(mockExtractPdfOperation);
 
         when(mockPDFClient.createExecutionContext()).thenReturn(mockExecutionContext);
-        when(mockCreatePdfOperation.execute(any(ExecutionContext.class))).thenReturn(mockFileRef);
+        when(mockExtractPdfOperation.execute(any(ExecutionContext.class))).thenReturn(mockFileRef);
     }
 
     @AfterEach
     void tearDown() {
-        mockedCreatePdfOperation.close();
+        mockedExtractPdfOperation.close();
     }
 
     @Test
     void testPerformOperation() throws Exception {
         OperationInput input = mock(OperationInput.class);
         Map<String, String> options = new HashMap<>();
-        options.put("documentlanguage", "EN_US");
+        options.put("addCharInfo", "false");
+        options.put("elementsToExtract", "TEXT");
 
         when(input.options()).thenReturn(options);
         when(input.source()).thenReturn(mockFileRef);
         when(input.executionContext()).thenReturn(mockExecutionContext);
 
-        FileRef result = createPdfFromDocx.performOperation(input);
+        FileRef result = extractInfoFromPdf.performOperation(input);
 
         verify(input, times(1)).options();
         verify(input, times(1)).source();
-        verify(mockCreatePdfOperation, times(1)).setInput(mockFileRef);
-        verify(mockCreatePdfOperation, times(1)).setOptions(any(CreatePDFOptions.class));
-        verify(mockCreatePdfOperation, times(1)).execute(mockExecutionContext);
+        verify(mockExtractPdfOperation, times(1)).setInputFile(mockFileRef);
+        verify(mockExtractPdfOperation, times(1)).setOptions(any(ExtractPDFOptions.class));
+        verify(mockExtractPdfOperation, times(1)).execute(mockExecutionContext);
         assert result == mockFileRef;
     }
 }

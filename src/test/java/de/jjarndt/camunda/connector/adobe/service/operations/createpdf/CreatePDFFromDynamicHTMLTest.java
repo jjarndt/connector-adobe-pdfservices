@@ -1,5 +1,6 @@
 package de.jjarndt.camunda.connector.adobe.service.operations.createpdf;
 
+
 import com.adobe.pdfservices.operation.ExecutionContext;
 import com.adobe.pdfservices.operation.exception.ServiceApiException;
 import com.adobe.pdfservices.operation.io.FileRef;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class CreatePDFFromDOCXTest {
+class CreatePDFFromDynamicHTMLTest {
 
     @Mock
     private PDFClient mockPDFClient;
@@ -39,14 +40,14 @@ class CreatePDFFromDOCXTest {
     @Mock
     private CreatePDFOperation mockCreatePdfOperation;
 
-    private CreatePDFFromDOCX createPdfFromDocx;
+    private CreatePDFFromDynamicHTML createPdfFromDynamicHtml;
 
     private MockedStatic<CreatePDFOperation> mockedCreatePdfOperation;
 
     @BeforeEach
     void setUp() throws ServiceApiException, IOException {
         MockitoAnnotations.openMocks(this);
-        createPdfFromDocx = new CreatePDFFromDOCX(mockPDFClient);
+        createPdfFromDynamicHtml = new CreatePDFFromDynamicHTML(mockPDFClient);
 
         mockedCreatePdfOperation = Mockito.mockStatic(CreatePDFOperation.class);
         mockedCreatePdfOperation.when(CreatePDFOperation::createNew).thenReturn(mockCreatePdfOperation);
@@ -64,13 +65,16 @@ class CreatePDFFromDOCXTest {
     void testPerformOperation() throws Exception {
         OperationInput input = mock(OperationInput.class);
         Map<String, String> options = new HashMap<>();
-        options.put("documentlanguage", "EN_US");
+        options.put("includeHeaderFooter", "true");
+        options.put("pageWidth", "8");
+        options.put("pageHeight", "11.5");
+        options.put("dataToMerge", "{}");
 
         when(input.options()).thenReturn(options);
         when(input.source()).thenReturn(mockFileRef);
         when(input.executionContext()).thenReturn(mockExecutionContext);
 
-        FileRef result = createPdfFromDocx.performOperation(input);
+        FileRef result = createPdfFromDynamicHtml.performOperation(input);
 
         verify(input, times(1)).options();
         verify(input, times(1)).source();

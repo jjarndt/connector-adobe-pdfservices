@@ -32,7 +32,7 @@ public final class CreatePDFFromDynamicHTML extends AbstractPDFOperation {
         boolean includeHeaderFooter = Boolean.parseBoolean(options.getOrDefault("includeHeaderFooter", "true"));
         double width = Double.parseDouble(options.getOrDefault("pageWidth", "8"));
         double height = Double.parseDouble(options.getOrDefault("pageHeight", "11.5"));
-        String dataToMerge = options.getOrDefault("dataToMerge", "{}"); // JSON String
+        String dataToMerge = options.getOrDefault("dataToMerge", "{}");
 
         PageLayout pageLayout = new PageLayout();
         pageLayout.setPageSize(width, height);
