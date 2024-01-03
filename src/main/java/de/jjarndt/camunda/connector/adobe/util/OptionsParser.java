@@ -11,8 +11,7 @@ public class OptionsParser {
             return Map.of();
         }
 
-        return Arrays.stream(input.split("[,;]+"))
-                .flatMap(s -> Arrays.stream(s.trim().split("\\s+(?=[a-zA-Z_]+\\s*=)")))
+        return Arrays.stream(input.split(";"))
                 .map(s -> s.replace(':', '=').trim())
                 .map(s -> s.split("=", 2))
                 .filter(arr -> arr.length == 2 && !arr[0].trim().isEmpty() && !arr[1].trim().isEmpty())
@@ -22,4 +21,5 @@ public class OptionsParser {
                         (existing, replacement) -> existing
                 ));
     }
+
 }

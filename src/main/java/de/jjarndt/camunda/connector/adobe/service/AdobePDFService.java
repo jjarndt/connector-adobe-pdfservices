@@ -4,8 +4,7 @@ import de.jjarndt.camunda.connector.adobe.model.OperationType;
 import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDFFromDOCX;
 import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDFFromDynamicHTML;
 import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDFFromPPTX;
-import de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf.ExtractTextInfoFromPDF;
-import de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf.ExtractTextTableInfoFromPDF;
+import de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf.ExtractInfoFromPDF;
 import de.jjarndt.camunda.connector.adobe.service.operations.ocr.CreateOCR;
 import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDFFromStaticHTML;
 import de.jjarndt.camunda.connector.adobe.service.operations.exportpdf.ExportPDFToDOCX;
@@ -20,8 +19,7 @@ public class AdobePDFService {
             case CREATE_PDF_FROM_DOCX -> new CreatePDFFromDOCX(client);
             case CREATE_PDF_FROM_DYNAMIC_HTML -> new CreatePDFFromDynamicHTML(client);
             case CREATE_PDF_FROM_PPTX -> new CreatePDFFromPPTX(client);
-            case EXTRACT_TEXT_INFO_FROM_PDF -> new ExtractTextInfoFromPDF(client);
-            case EXTRACT_TEXT_TABLE_INFO_FROM_PDF -> new ExtractTextTableInfoFromPDF(client);
+            case EXTRACT_INFO_FROM_PDF -> new ExtractInfoFromPDF(client);
         };
     }
 }

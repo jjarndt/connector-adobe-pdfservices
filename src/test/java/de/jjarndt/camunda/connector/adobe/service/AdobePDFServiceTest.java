@@ -7,8 +7,7 @@ import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDF
 import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDFFromPPTX;
 import de.jjarndt.camunda.connector.adobe.service.operations.createpdf.CreatePDFFromStaticHTML;
 import de.jjarndt.camunda.connector.adobe.service.operations.exportpdf.ExportPDFToDOCX;
-import de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf.ExtractTextInfoFromPDF;
-import de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf.ExtractTextTableInfoFromPDF;
+import de.jjarndt.camunda.connector.adobe.service.operations.extractfrompdf.ExtractInfoFromPDF;
 import de.jjarndt.camunda.connector.adobe.service.operations.ocr.CreateOCR;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -64,14 +63,9 @@ class AdobePDFServiceTest {
 
     @Test
     void testExtractTextInfoFromPDFOperation() {
-        Operation operation = AdobePDFService.createOperation(OperationType.EXTRACT_TEXT_INFO_FROM_PDF, mockClient);
-        assertTrue(operation instanceof ExtractTextInfoFromPDF);
+        Operation operation = AdobePDFService.createOperation(OperationType.EXTRACT_INFO_FROM_PDF, mockClient);
+        assertTrue(operation instanceof ExtractInfoFromPDF);
     }
 
-    @Test
-    void testExtractTextTableInfoFromPDFOperation() {
-        Operation operation = AdobePDFService.createOperation(OperationType.EXTRACT_TEXT_TABLE_INFO_FROM_PDF, mockClient);
-        assertTrue(operation instanceof ExtractTextTableInfoFromPDF);
-    }
 
 }

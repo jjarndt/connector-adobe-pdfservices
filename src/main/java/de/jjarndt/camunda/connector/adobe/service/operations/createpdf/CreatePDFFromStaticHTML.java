@@ -8,6 +8,8 @@ import de.jjarndt.camunda.connector.adobe.service.PDFClient;
 import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperation;
 import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 
+import java.util.Map;
+
 public final class CreatePDFFromStaticHTML extends AbstractPDFOperation {
     public CreatePDFFromStaticHTML(PDFClient client) {
         super(client);
@@ -17,21 +19,26 @@ public final class CreatePDFFromStaticHTML extends AbstractPDFOperation {
     protected FileRef performOperation(OperationInput input) throws Exception {
         CreatePDFOperation htmlToPDFOperation = CreatePDFOperation.createNew();
         htmlToPDFOperation.setInput(input.source());
-        setCustomOptions(htmlToPDFOperation); // Implement this method as needed
+
+        Map<String, String> options = input.options();
+        CreatePDFOptions createPDFOptions = buildCreatePDFOptions(options);
+        htmlToPDFOperation.setOptions(createPDFOptions);
+
         return htmlToPDFOperation.execute(input.executionContext());
     }
 
-    private static void setCustomOptions(CreatePDFOperation htmlToPDFOperation) {
-        // Define the page layout, in this case an 8 x 11.5 inch page (effectively portrait orientation).
-        PageLayout pageLayout = new PageLayout();
-        pageLayout.setPageSize(8, 11.5);
+    private CreatePDFOptions buildCreatePDFOptions(Map<String, String> options) {
+        boolean includeHeaderFooter = Boolean.parseBoolean(options.getOrDefault("includeheaderFooter", "true"));
+        double width = Double.parseDouble(options.getOrDefault("pagewidth", "8"));
+        double height = Double.parseDouble(options.getOrDefault("pageheight", "11.5"));
 
-        // Set the desired HTML-to-PDF conversion options.
-        CreatePDFOptions htmlToPdfOptions = CreatePDFOptions.htmlOptionsBuilder()
-                .includeHeaderFooter(true)
+        PageLayout pageLayout = new PageLayout();
+        pageLayout.setPageSize(width, height);
+
+        return CreatePDFOptions.htmlOptionsBuilder()
+                .includeHeaderFooter(includeHeaderFooter)
                 .withPageLayout(pageLayout)
                 .build();
-        htmlToPDFOperation.setOptions(htmlToPdfOptions);
     }
 }
 

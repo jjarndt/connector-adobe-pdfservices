@@ -84,31 +84,19 @@ class CreateOCRTest {
 
         FileRef result = createOCR.performOperation(mockInput);
 
-        // Verifizieren Sie das Verhalten mit den neuen Optionen
         verify(mockOCROperation).setOptions(any(OCROptions.class));
         Assertions.assertEquals(mockResult, result);
     }
 
     @Test
     void performOperationWithMissingOptions() throws Exception {
-        // Setzen Sie leere Optionen
         when(mockInput.options()).thenReturn(Map.of());
 
         FileRef result = createOCR.performOperation(mockInput);
 
-        // Verifizieren Sie das Verhalten mit Standardoptionen
         verify(mockOCROperation).setOptions(any(OCROptions.class));
         Assertions.assertEquals(mockResult, result);
     }
-
-//    @Test
-//    void performOperationHandlesExceptions() {
-//        // Simulieren Sie eine Ausnahme bei der OCR-Operation
-//        when(mockOCROperation.execute(any())).thenThrow(new ServiceApiException("Fehler"));
-//
-//        // Überprüfen Sie, ob die Ausnahme wie erwartet weitergegeben wird
-//        assertThrows(ServiceApiException.class, () -> createOCR.performOperation(mockInput));
-//    }
 
     private Map<String, String> getDefaultOptions() {
         Map<String, String> options = new HashMap<>();

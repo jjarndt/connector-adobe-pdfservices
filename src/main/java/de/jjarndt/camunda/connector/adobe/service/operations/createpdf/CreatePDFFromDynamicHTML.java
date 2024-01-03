@@ -9,6 +9,8 @@ import de.jjarndt.camunda.connector.adobe.service.operations.AbstractPDFOperatio
 import de.jjarndt.camunda.connector.adobe.model.OperationInput;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 public final class CreatePDFFromDynamicHTML extends AbstractPDFOperation {
     public CreatePDFFromDynamicHTML(PDFClient client) {
         super(client);
@@ -19,23 +21,29 @@ public final class CreatePDFFromDynamicHTML extends AbstractPDFOperation {
         CreatePDFOperation htmlToPDFOperation = CreatePDFOperation.createNew();
         htmlToPDFOperation.setInput(input.source());
 
-        setCustomOptions(htmlToPDFOperation);
+        Map<String, String> options = input.options();
+        CreatePDFOptions createPDFOptions = buildCreatePDFOptions(options);
+        htmlToPDFOperation.setOptions(createPDFOptions);
 
         return htmlToPDFOperation.execute(input.executionContext());
     }
 
-    private void setCustomOptions(CreatePDFOperation htmlToPDFOperation) {
+    private CreatePDFOptions buildCreatePDFOptions(Map<String, String> options) {
+        boolean includeHeaderFooter = Boolean.parseBoolean(options.getOrDefault("includeHeaderFooter", "true"));
+        double width = Double.parseDouble(options.getOrDefault("pageWidth", "8"));
+        double height = Double.parseDouble(options.getOrDefault("pageHeight", "11.5"));
+        String dataToMerge = options.getOrDefault("dataToMerge", "{}"); // JSON String
+
         PageLayout pageLayout = new PageLayout();
-        pageLayout.setPageSize(8, 11.5);
+        pageLayout.setPageSize(width, height);
 
-        JSONObject dataToMerge = new JSONObject();
+        JSONObject dataToMergeJSON = new JSONObject(dataToMerge);
 
-        CreatePDFOptions options = CreatePDFOptions.htmlOptionsBuilder()
-                .includeHeaderFooter(true)
+        return CreatePDFOptions.htmlOptionsBuilder()
+                .includeHeaderFooter(includeHeaderFooter)
                 .withPageLayout(pageLayout)
-                .withDataToMerge(dataToMerge)
+                .withDataToMerge(dataToMergeJSON)
                 .build();
-        htmlToPDFOperation.setOptions(options);
     }
 }
 
