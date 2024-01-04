@@ -64,7 +64,7 @@ class CreatePDFFromDOCXTest {
     void testPerformOperation() throws Exception {
         OperationInput input = mock(OperationInput.class);
         Map<String, String> options = new HashMap<>();
-        options.put("documentlanguage", "EN_US");
+        options.put("document_language", "EN_US");
 
         when(input.options()).thenReturn(options);
         when(input.source()).thenReturn(mockFileRef);

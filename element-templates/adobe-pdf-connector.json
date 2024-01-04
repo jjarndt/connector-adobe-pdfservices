@@ -1,229 +1,354 @@
 {
-  "$schema" : "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
-  "name" : "Adobe PDF Connector",
-  "id" : "de.jjarndt.camunda.connector.adobe.PDFConnector.v1",
-  "description" : "Connector to interact with Adobe PDF Services",
-  "documentationRef" : "https://developer.adobe.com/document-services/apis/pdf-services/",
-  "version" : 1,
-  "category" : {
-    "id" : "connectors",
-    "name" : "Connectors"
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "Adobe PDF Connector",
+  "id": "de.jjarndt.camunda.connector.adobe.PDFConnector.v1",
+  "description": "Connector to interact with Adobe PDF Services",
+  "documentationRef": "https://developer.adobe.com/document-services/apis/pdf-services/",
+  "version": 1,
+  "category": {
+    "id": "connectors",
+    "name": "Connectors"
   },
-  "appliesTo" : [ "bpmn:Task" ],
-  "elementType" : {
-    "value" : "bpmn:ServiceTask"
+  "appliesTo": [
+    "bpmn:Task"
+  ],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
   },
-  "groups" : [ {
-    "id" : "authentication",
-    "label" : "Authentication"
-  }, {
-    "id" : "source",
-    "label" : "Source Information"
-  }, {
-    "id" : "destination",
-    "label" : "Destination Information"
-  }, {
-    "id" : "operation",
-    "label" : "Operation Details"
-  }, {
-    "id" : "output",
-    "label" : "Output mapping"
-  }, {
-    "id" : "error",
-    "label" : "Error handling"
-  }, {
-    "id" : "retries",
-    "label" : "Retries"
-  } ],
-  "properties" : [ {
-    "value" : "de.jjarndt.camunda.connector:adobe-pdfservices:1",
-    "binding" : {
-      "type" : "zeebe:taskDefinition:type"
+  "groups": [
+    {
+      "id": "authentication",
+      "label": "Authentication"
     },
-    "type" : "Hidden"
-  }, {
-    "id" : "authentication.clientId",
-    "label" : "Client ID",
-    "description" : "The client ID for authentication",
-    "optional" : false,
-    "constraints" : {
-      "notEmpty" : true
+    {
+      "id": "operation",
+      "label": "Perform Operation"
     },
-    "feel" : "optional",
-    "group" : "authentication",
-    "binding" : {
-      "name" : "authentication.clientId",
-      "type" : "zeebe:input"
+    {
+      "id": "source",
+      "label": "File Source"
     },
-    "type" : "String"
-  }, {
-    "id" : "authentication.clientSecret",
-    "label" : "Client Secret",
-    "description" : "The client secret for authentication",
-    "optional" : false,
-    "constraints" : {
-      "notEmpty" : true
+    {
+      "id": "destination",
+      "label": "File Destination"
     },
-    "feel" : "optional",
-    "group" : "authentication",
-    "binding" : {
-      "name" : "authentication.clientSecret",
-      "type" : "zeebe:input"
+    {
+      "id": "output",
+      "label": "Output mapping"
     },
-    "type" : "String"
-  }, {
-    "id" : "requestDetails.sourceType",
-    "label" : "Source Type",
-    "description" : "Type of the source of the PDF",
-    "optional" : false,
-    "group" : "source",
-    "binding" : {
-      "name" : "requestDetails.sourceType",
-      "type" : "zeebe:input"
+    {
+      "id": "error",
+      "label": "Error handling"
     },
-    "type" : "Dropdown",
-    "choices" : [ {
-      "name" : "LOCAL_FILE",
-      "value" : "LOCAL_FILE"
-    }, {
-      "name" : "URL",
-      "value" : "URL"
-    } ]
-  }, {
-    "id" : "requestDetails.sourcePath",
-    "label" : "Source Path",
-    "description" : "Path of the source PDF",
-    "optional" : false,
-    "feel" : "optional",
-    "group" : "source",
-    "binding" : {
-      "name" : "requestDetails.sourcePath",
-      "type" : "zeebe:input"
+    {
+      "id": "retries",
+      "label": "Retries"
+    }
+  ],
+  "properties": [
+    {
+      "value": "de.jjarndt.camunda.connector:adobe-pdfservices:1",
+      "binding": {
+        "type": "zeebe:taskDefinition:type"
+      },
+      "type": "Hidden"
     },
-    "type" : "String"
-  }, {
-    "id" : "requestDetails.destinationType",
-    "label" : "Destination Type",
-    "description" : "Type of the destination for the PDF",
-    "optional" : false,
-    "group" : "destination",
-    "binding" : {
-      "name" : "requestDetails.destinationType",
-      "type" : "zeebe:input"
+    {
+      "id": "authentication.clientId",
+      "label": "Client ID",
+      "description": "The client ID for authentication",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "authentication",
+      "binding": {
+        "name": "authentication.clientId",
+        "type": "zeebe:input"
+      },
+      "type": "String"
     },
-    "type" : "Dropdown",
-    "choices" : [ {
-      "name" : "LOCAL_FILE",
-      "value" : "LOCAL_FILE"
-    }, {
-      "name" : "EXTERNAL_STORAGE",
-      "value" : "EXTERNAL_STORAGE"
-    } ]
-  }, {
-    "id" : "requestDetails.destinationPath",
-    "label" : "Destination Path",
-    "description" : "Path for the output PDF",
-    "optional" : false,
-    "feel" : "optional",
-    "group" : "destination",
-    "binding" : {
-      "name" : "requestDetails.destinationPath",
-      "type" : "zeebe:input"
+    {
+      "id": "authentication.clientSecret",
+      "label": "Client Secret",
+      "description": "The client secret for authentication",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "optional",
+      "group": "authentication",
+      "binding": {
+        "name": "authentication.clientSecret",
+        "type": "zeebe:input"
+      },
+      "type": "String"
     },
-    "type" : "String"
-  }, {
-    "id" : "requestDetails.operationType",
-    "label" : "Operation Type",
-    "description" : "Type of operation to perform on the PDF",
-    "optional" : false,
-    "group" : "operation",
-    "binding" : {
-      "name" : "requestDetails.operationType",
-      "type" : "zeebe:input"
+    {
+      "id": "requestDetails.sourceType",
+      "label": "Source Type",
+      "description": "Type of the source of the PDF",
+      "optional": false,
+      "group": "source",
+      "binding": {
+        "name": "requestDetails.sourceType",
+        "type": "zeebe:input"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "LOCAL_FILE",
+          "value": "LOCAL_FILE"
+        },
+        {
+          "name": "URL",
+          "value": "URL"
+        }
+      ]
     },
-    "type" : "Dropdown",
-    "choices" : [ {
-      "name" : "EXTRACT_TEXT_INFO_FROM_PDF",
-      "value" : "EXTRACT_TEXT_INFO_FROM_PDF"
-    }, {
-      "name" : "CREATE_PDF_FROM_DYNAMIC_HTML",
-      "value" : "CREATE_PDF_FROM_DYNAMIC_HTML"
-    }, {
-      "name" : "EXTRACT_TEXT_TABLE_INFO_FROM_PDF",
-      "value" : "EXTRACT_TEXT_TABLE_INFO_FROM_PDF"
-    }, {
-      "name" : "CREATE_PDF_FROM_STATIC_HTML",
-      "value" : "CREATE_PDF_FROM_STATIC_HTML"
-    }, {
-      "name" : "EXPORT_FROM_DOCX",
-      "value" : "EXPORT_FROM_DOCX"
-    }, {
-      "name" : "CREATE_PDF_FROM_DOCX",
-      "value" : "CREATE_PDF_FROM_DOCX"
-    }, {
-      "name" : "CREATE_PDF_FROM_PPTX",
-      "value" : "CREATE_PDF_FROM_PPTX"
-    }, {
-      "name" : "OCR",
-      "value" : "OCR"
-    } ]
-  }, {
-    "id" : "requestDetails.options",
-    "label" : "Options",
-    "description" : "Type of operation to perform on the PDF",
-    "optional" : false,
-    "feel" : "optional",
-    "group" : "operation",
-    "binding" : {
-      "name" : "requestDetails.options",
-      "type" : "zeebe:input"
+    {
+      "id": "requestDetails.sourcePath",
+      "label": "Source Path",
+      "description": "Path of the source PDF",
+      "optional": false,
+      "feel": "optional",
+      "group": "source",
+      "binding": {
+        "name": "requestDetails.sourcePath",
+        "type": "zeebe:input"
+      },
+      "type": "String"
     },
-    "type" : "String"
-  }, {
-    "id" : "resultVariable",
-    "label" : "Result variable",
-    "description" : "Name of variable to store the response in",
-    "group" : "output",
-    "binding" : {
-      "key" : "resultVariable",
-      "type" : "zeebe:taskHeader"
+    {
+      "id": "requestDetails.destinationType",
+      "label": "Destination Type",
+      "description": "Type of the destination for the PDF",
+      "optional": false,
+      "group": "destination",
+      "binding": {
+        "name": "requestDetails.destinationType",
+        "type": "zeebe:input"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "LOCAL_FILE",
+          "value": "LOCAL_FILE"
+        },
+        {
+          "name": "EXTERNAL_STORAGE",
+          "value": "EXTERNAL_STORAGE"
+        }
+      ]
     },
-    "type" : "String"
-  }, {
-    "id" : "resultExpression",
-    "label" : "Result expression",
-    "description" : "Expression to map the response into process variables",
-    "feel" : "required",
-    "group" : "output",
-    "binding" : {
-      "key" : "resultExpression",
-      "type" : "zeebe:taskHeader"
+    {
+      "id": "requestDetails.destinationPath",
+      "label": "Destination Path",
+      "description": "Path for the output PDF",
+      "optional": false,
+      "feel": "optional",
+      "group": "destination",
+      "binding": {
+        "name": "requestDetails.destinationPath",
+        "type": "zeebe:input"
+      },
+      "type": "String"
     },
-    "type" : "Text"
-  }, {
-    "id" : "errorExpression",
-    "label" : "Error expression",
-    "description" : "Expression to handle errors. Details in the <a href=\"https://docs.camunda.io/docs/components/connectors/use-connectors/\" target=\"_blank\">documentation</a>.",
-    "feel" : "required",
-    "group" : "error",
-    "binding" : {
-      "key" : "errorExpression",
-      "type" : "zeebe:taskHeader"
+    {
+      "id": "requestDetails.operationType",
+      "label": "Operation Type",
+      "description": "Type of operation to perform on the PDF",
+      "optional": false,
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.operationType",
+        "type": "zeebe:input"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Create PDF from Dynamic HTML",
+          "value": "CREATE_PDF_FROM_DYNAMIC_HTML"
+        },
+        {
+          "name": "Create PDF from Static HTML",
+          "value": "CREATE_PDF_FROM_STATIC_HTML"
+        },
+        {
+          "name": "Extract Information from PDF",
+          "value": "EXTRACT_INFO_FROM_PDF"
+        },
+        {
+          "name": "Export from DOCX",
+          "value": "EXPORT_FROM_DOCX"
+        },
+        {
+          "name": "Create PDF from DOCX",
+          "value": "CREATE_PDF_FROM_DOCX"
+        },
+        {
+          "name": "Create PDF from PPTX",
+          "value": "CREATE_PDF_FROM_PPTX"
+        },
+        {
+          "name": "Create OCR of PDF",
+          "value": "OCR"
+        }
+      ]
     },
-    "type" : "Text"
-  }, {
-    "id" : "retryBackoff",
-    "label" : "Retry backoff",
-    "description" : "ISO-8601 duration to wait between retries",
-    "value" : "PT0S",
-    "group" : "retries",
-    "binding" : {
-      "key" : "retryBackoff",
-      "type" : "zeebe:taskHeader"
+    {
+      "id": "requestDetails.ocrAdditionalInput",
+      "label": "Create OCR of PDF",
+      "description": "Optional: 'locale' (default 'EN_US'), 'type' ('SEARCHABLE_IMAGE' or 'SEARCHABLE_IMAGE_EXACT'). Example: locale=DE_DE, type=SEARCHABLE_IMAGE",
+      "type": "String",
+      "optional": true,
+      "feel": "optional",
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.options",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "requestDetails.operationType",
+        "equals": "OCR"
+      }
     },
-    "type" : "Hidden"
-  } ],
-  "icon" : {
-    "contents" : "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDYwIDU4LjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KICA8cGF0aCBkPSJNMTAuNiAwaDM4LjhDNTUuMiAwIDYwIDQuOCA2MCAxMC42djM3LjJjMCA1LjktNC44IDEwLjYtMTAuNiAxMC42SDEwLjZDNC44IDU4LjUgMCA1My43IDAgNDcuOVYxMC42QzAgNC44IDQuOCAwIDEwLjYgMHoiIGZpbGw9IiNiMzBiMDAiLz4NCiAgPHBhdGggZD0iTTQ4LjIgMzMuOUM0NyAzMi42IDQ0LjcgMzIgNDEuNCAzMmMtMS44IDAtMy43LjItNS41LjUtMS4yLTEuMS0yLjItMi40LTMuMi0zLjctLjctMS0xLjQtMi0yLTMuMSAxLTIuOCAxLjYtNS44IDEuOC04LjggMC0yLjctMS4xLTUuNi00LjEtNS42LTEgMC0yIC42LTIuNSAxLjUtMS4zIDIuMi0uOCA2LjcgMS4zIDExLjQtLjcgMi4xLTEuNSA0LjItMi40IDYuNS0uOCAyLTEuNyAzLjktMi44IDUuNy0zLjEgMS4yLTkuNiA0LjItMTAuMiA3LjUtLjIgMSAuMSAyIC45IDIuNi43LjYgMS43IDEgMi43LjkgMy45IDAgNy44LTUuNCAxMC41LTEwLjEgMS41LS41IDMtMSA0LjYtMS40IDEuNy0uNCAzLjMtLjggNC44LTEuMSA0LjIgMy42IDcuOSA0LjIgOS43IDQuMiAyLjUgMCAzLjUtMS4xIDMuOC0yIC40LTEuMS4yLTIuMy0uNi0zLjF6bS0yLjcgMS45Yy0uMS43LS45IDEuMi0xLjkgMS4yLS4zIDAtLjYgMC0uOS0uMS0yLS41LTMuOS0xLjUtNS41LTIuOCAxLjMtLjIgMi43LS4zIDQtLjMuOSAwIDEuOC4xIDIuNy4yLjkuMiAxLjkuNiAxLjYgMS44ek0yNy42IDEzLjdjLjItLjMuNS0uNS45LS42IDEgMCAxLjIgMS4xIDEuMiAyLjEtLjEgMi4zLS41IDQuNS0xLjIgNi43LTEuNy00LjMtMS41LTcuMi0uOS04LjJ6bTUuNiAxOS4yYy0xLjEuMi0yLjIuNS0zLjMuOC0uOC4yLTEuNi41LTIuNS43LjQtLjkuOC0xLjggMS4yLTIuNi41LTEuMS45LTIuMiAxLjMtMy4zLjQuNi43IDEuMSAxLjEgMS42LjcgMSAxLjUgMS45IDIuMiAyLjh6bS0xMi4xIDUuOGMtMi41IDQtNSA2LjYtNi40IDYuNi0uMiAwLS41LS4xLS42LS4yLS4zLS4yLS40LS42LS4zLS45LjItMS41IDMuMS0zLjYgNy4zLTUuNXoiIGZpbGw9IiNmZmYiLz4NCjwvc3ZnPg0K"
+    {
+      "id": "requestDetails.createPdfFromDocxInput",
+      "label": "Create PDF From DOCX",
+      "description": "Optional: 'document_language' (default 'EN_US'). Example: document_language=DE_DE",
+      "type": "String",
+      "optional": true,
+      "feel": "optional",
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.options",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "requestDetails.operationType",
+        "equals": "CREATE_PDF_FROM_DOCX"
+      }
+    },
+    {
+      "id": "requestDetails.dynamicHtmlInput",
+      "label": "Create PDF from Dynamic HTML",
+      "description": "Input for creating PDF from dynamic HTML. Optional: 'include_header_footer' (boolean, default true), 'page_width' (numeric, default 8), 'page_height' (numeric, default 11.5), 'data_to_merge' (JSON format, default '{}'). Example: include_header_footer=false, page_width=8.5, page_height=11, data_to_merge={\\\"key\\\":\\\"value\\\"}",
+      "type": "String",
+      "feel": "optional",
+      "optional": true,
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.options",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "requestDetails.operationType",
+        "equals": "CREATE_PDF_FROM_DYNAMIC_HTML"
+      }
+    },
+    {
+      "id": "requestDetails.staticHtmlInput",
+      "label": "Create PDF From Static HTML Input",
+      "description": "Optional: 'include_header_footer' (boolean, default true), 'page_width' (numeric, default 8), 'page_height' (numeric, default 11.5). Example: include_header_footer=false, page_width=8.5, page_height=11",
+      "type": "String",
+      "optional": true,
+      "feel": "optional",
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.options",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "requestDetails.operationType",
+        "equals": "CREATE_PDF_FROM_STATIC_HTML"
+      }
+    },
+    {
+      "id": "requestDetails.pdfInfoInput",
+      "label": "Extract Information From PDF",
+      "description": "Optional: 'add_char_info' (boolean, default false), 'elements_to_extract' ('TEXT' or 'TABLES', default 'TEXT'). Example: add_char_info=true, elements_to_extract=TABLES",
+      "type": "String",
+      "feel": "optional",
+      "optional": true,
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.options",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "requestDetails.operationType",
+        "equals": "EXTRACT_INFO_FROM_PDF"
+      }
+    },
+    {
+      "id": "requestDetails.exportDocxInput",
+      "label": "Create PDF From DOCX",
+      "description": "Optional: 'document_language' (default 'EN_US').Supported languages are based on 'SupportedDocumentLanguage' enum. Example: document_language=DE_DE",
+      "type": "String",
+      "optional": true,
+      "feel": "optional",
+      "group": "operation",
+      "binding": {
+        "name": "requestDetails.options",
+        "type": "zeebe:input"
+      },
+      "condition": {
+        "property": "requestDetails.operationType",
+        "equals": "EXPORT_FROM_DOCX"
+      }
+    }
+  ,
+    {
+      "id": "resultVariable",
+      "label": "Result variable",
+      "description": "Name of variable to store the response in",
+      "group": "output",
+      "binding": {
+        "key": "resultVariable",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "String"
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result expression",
+      "description": "Expression to map the response into process variables",
+      "feel": "required",
+      "group": "output",
+      "binding": {
+        "key": "resultExpression",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "errorExpression",
+      "label": "Error expression",
+      "description": "Expression to handle errors. Details in the <a href=\"https://docs.camunda.io/docs/components/connectors/use-connectors/\" target=\"_blank\">documentation</a>.",
+      "feel": "required",
+      "group": "error",
+      "binding": {
+        "key": "errorExpression",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "retryBackoff",
+      "label": "Retry backoff",
+      "description": "ISO-8601 duration to wait between retries",
+      "value": "PT0S",
+      "group": "retries",
+      "binding": {
+        "key": "retryBackoff",
+        "type": "zeebe:taskHeader"
+      },
+      "type": "Hidden"
+    }
+  ],
+  "icon": {
+    "contents": "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDYwIDU4LjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KICA8cGF0aCBkPSJNMTAuNiAwaDM4LjhDNTUuMiAwIDYwIDQuOCA2MCAxMC42djM3LjJjMCA1LjktNC44IDEwLjYtMTAuNiAxMC42SDEwLjZDNC44IDU4LjUgMCA1My43IDAgNDcuOVYxMC42QzAgNC44IDQuOCAwIDEwLjYgMHoiIGZpbGw9IiNiMzBiMDAiLz4NCiAgPHBhdGggZD0iTTQ4LjIgMzMuOUM0NyAzMi42IDQ0LjcgMzIgNDEuNCAzMmMtMS44IDAtMy43LjItNS41LjUtMS4yLTEuMS0yLjItMi40LTMuMi0zLjctLjctMS0xLjQtMi0yLTMuMSAxLTIuOCAxLjYtNS44IDEuOC04LjggMC0yLjctMS4xLTUuNi00LjEtNS42LTEgMC0yIC42LTIuNSAxLjUtMS4zIDIuMi0uOCA2LjcgMS4zIDExLjQtLjcgMi4xLTEuNSA0LjItMi40IDYuNS0uOCAyLTEuNyAzLjktMi44IDUuNy0zLjEgMS4yLTkuNiA0LjItMTAuMiA3LjUtLjIgMSAuMSAyIC45IDIuNi43LjYgMS43IDEgMi43LjkgMy45IDAgNy44LTUuNCAxMC41LTEwLjEgMS41LS41IDMtMSA0LjYtMS40IDEuNy0uNCAzLjMtLjggNC44LTEuMSA0LjIgMy42IDcuOSA0LjIgOS43IDQuMiAyLjUgMCAzLjUtMS4xIDMuOC0yIC40LTEuMS4yLTIuMy0uNi0zLjF6bS0yLjcgMS45Yy0uMS43LS45IDEuMi0xLjkgMS4yLS4zIDAtLjYgMC0uOS0uMS0yLS41LTMuOS0xLjUtNS41LTIuOCAxLjMtLjIgMi43LS4zIDQtLjMuOSAwIDEuOC4xIDIuNy4yLjkuMiAxLjkuNiAxLjYgMS44ek0yNy42IDEzLjdjLjItLjMuNS0uNS45LS42IDEgMCAxLjIgMS4xIDEuMiAyLjEtLjEgMi4zLS41IDQuNS0xLjIgNi43LTEuNy00LjMtMS41LTcuMi0uOS04LjJ6bTUuNiAxOS4yYy0xLjEuMi0yLjIuNS0zLjMuOC0uOC4yLTEuNi41LTIuNS43LjQtLjkuOC0xLjggMS4yLTIuNi41LTEuMS45LTIuMiAxLjMtMy4zLjQuNi43IDEuMSAxLjEgMS42LjcgMSAxLjUgMS45IDIuMiAyLjh6bS0xMi4xIDUuOGMtMi41IDQtNSA2LjYtNi40IDYuNi0uMiAwLS41LS4xLS42LS4yLS4zLS4yLS40LS42LS4zLS45LjItMS41IDMuMS0zLjYgNy4zLTUuNXoiIGZpbGw9IiNmZmYiLz4NCjwvc3ZnPg0K"
   }
 }

@@ -64,8 +64,8 @@ class ExtractInfoFromPDFTest {
     void testPerformOperation() throws Exception {
         OperationInput input = mock(OperationInput.class);
         Map<String, String> options = new HashMap<>();
-        options.put("addCharInfo", "false");
-        options.put("elementsToExtract", "TEXT");
+        options.put("add_char_info", "false");
+        options.put("elements_to_extract", "TEXT");
 
         when(input.options()).thenReturn(options);
         when(input.source()).thenReturn(mockFileRef);

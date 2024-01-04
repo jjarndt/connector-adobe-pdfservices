@@ -29,10 +29,10 @@ public final class CreatePDFFromDynamicHTML extends AbstractPDFOperation {
     }
 
     private CreatePDFOptions buildCreatePDFOptions(Map<String, String> options) {
-        boolean includeHeaderFooter = Boolean.parseBoolean(options.getOrDefault("includeHeaderFooter", "true"));
-        double width = Double.parseDouble(options.getOrDefault("pageWidth", "8"));
-        double height = Double.parseDouble(options.getOrDefault("pageHeight", "11.5"));
-        String dataToMerge = options.getOrDefault("dataToMerge", "{}");
+        boolean includeHeaderFooter = Boolean.parseBoolean(options.getOrDefault("include_header_footer", "true"));
+        double width = Double.parseDouble(options.getOrDefault("page_width", "8"));
+        double height = Double.parseDouble(options.getOrDefault("page_height", "11.5"));
+        String dataToMerge = options.getOrDefault("data_to_merge", "{}");
 
         PageLayout pageLayout = new PageLayout();
         pageLayout.setPageSize(width, height);

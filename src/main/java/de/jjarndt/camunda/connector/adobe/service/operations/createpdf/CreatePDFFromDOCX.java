@@ -31,7 +31,7 @@ public final class CreatePDFFromDOCX extends AbstractPDFOperation {
 
     private CreatePDFOptions buildCreatePDFOptions(Map<String, String> options) {
         SupportedDocumentLanguage documentLanguage = SupportedDocumentLanguage.valueOf(
-                options.getOrDefault("documentlanguage", "EN_US"));
+                options.getOrDefault("document_language", "EN_US"));
 
         return CreatePDFOptions.wordOptionsBuilder()
                 .withDocumentLanguage(documentLanguage)

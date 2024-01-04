@@ -31,8 +31,8 @@ public final class ExtractInfoFromPDF extends AbstractPDFOperation {
     }
 
     private ExtractPDFOptions buildExtractPDFOptions(Map<String, String> options) {
-        boolean addCharInfo = Boolean.parseBoolean(options.getOrDefault("addCharInfo", "false"));
-        String elements = options.getOrDefault("elementsToExtract", "TEXT");
+        boolean addCharInfo = Boolean.parseBoolean(options.getOrDefault("add_char_info", "false"));
+        String elements = options.getOrDefault("elements_to_extract", "TEXT");
         List<ExtractElementType> elementTypes = Arrays.stream(elements.split(","))
                 .map(String::trim)
                 .map(ExtractElementType::valueOf)
@@ -44,4 +44,3 @@ public final class ExtractInfoFromPDF extends AbstractPDFOperation {
                 .build();
     }
 }
-

@@ -21,6 +21,7 @@ class OptionsParserTest {
         return Stream.of(
                 Arguments.of("option=EN_US; option2=SEARCH", Map.of("option", "EN_US", "option2", "SEARCH")),
                 Arguments.of("option=en-us", Map.of("option", "EN_US")),
+                Arguments.of("option_option=en-us", Map.of("option", "EN_US")),
                 Arguments.of("OPTION=EN_US", Map.of("option", "EN_US")),
                 Arguments.of("option:EN_US", Map.of("option", "EN_US")),
                 Arguments.of("option: EN_US", Map.of("option", "EN_US")),

@@ -28,9 +28,9 @@ public final class CreatePDFFromStaticHTML extends AbstractPDFOperation {
     }
 
     private CreatePDFOptions buildCreatePDFOptions(Map<String, String> options) {
-        boolean includeHeaderFooter = Boolean.parseBoolean(options.getOrDefault("includeheaderFooter", "true"));
-        double width = Double.parseDouble(options.getOrDefault("pagewidth", "8"));
-        double height = Double.parseDouble(options.getOrDefault("pageheight", "11.5"));
+        boolean includeHeaderFooter = Boolean.parseBoolean(options.getOrDefault("include_header_footer", "true"));
+        double width = Double.parseDouble(options.getOrDefault("page_width", "8"));
+        double height = Double.parseDouble(options.getOrDefault("page_height", "11.5"));
 
         PageLayout pageLayout = new PageLayout();
         pageLayout.setPageSize(width, height);
@@ -41,4 +41,3 @@ public final class CreatePDFFromStaticHTML extends AbstractPDFOperation {
                 .build();
     }
 }
-

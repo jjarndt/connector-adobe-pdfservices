@@ -64,9 +64,9 @@ class CreatePDFFromStaticHTMLTest {
     void testPerformOperation() throws Exception {
         OperationInput input = mock(OperationInput.class);
         Map<String, String> options = new HashMap<>();
-        options.put("includeHeaderFooter", "true");
-        options.put("pageWidth", "8");
-        options.put("pageHeight", "11.5");
+        options.put("include_header_footer", "true");
+        options.put("page_width", "8");
+        options.put("page_height", "11.5");
 
         when(input.options()).thenReturn(options);
         when(input.source()).thenReturn(mockFileRef);
